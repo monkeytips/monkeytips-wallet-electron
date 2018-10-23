@@ -19,26 +19,26 @@ log.transports.file.level = LOG_LEVEL;
 log.transports.file.maxSize = 5 * 1024 * 1024;
 
 const WALLETSHELL_VERSION = app.getVersion() || '0.3.4';
-const SERVICE_FILENAME =  (platform === 'win32' ? 'turtle-service.exe' : 'turtle-service' );
+const SERVICE_FILENAME =  (platform === 'win32' ? 'monkey-service.exe' : 'monkey-service' );
 const SERVICE_OSDIR = (platform === 'win32' ? 'win' : (platform === 'darwin' ? 'osx' : 'lin'));
 const DEFAULT_SERVICE_BIN = path.join(process.resourcesPath,'bin', SERVICE_OSDIR, SERVICE_FILENAME);
-const DEFAULT_TITLE = 'WalletShell TurtleCoin Wallet';
+const DEFAULT_TITLE = 'WalletShell monkeytipsWallet';
 const DEFAULT_TRAY_TIP = 'Slow and steady wins the race!';
-const PUBLIC_NODES_URL = 'https://raw.githubusercontent.com/turtlecoin/turtlecoin-nodes-json/master/turtlecoin-nodes.json';
+const PUBLIC_NODES_URL = 'https://raw.githubusercontent.com/monkeytips/monkeytips-nodes-json/master/monkeytips-nodes.json';
 const FALLBACK_NODES = [
-    'public.turtlenode.io:11898',
-    'public.turtlenode.net:11898',
+    'monkeytips.top:13002',
+
 ];
 const DEFAULT_SETTINGS = {
     service_bin: DEFAULT_SERVICE_BIN,
     service_host: '127.0.0.1',
-    service_port: 8070,
+    service_port: 8420,
     service_password: crypto.randomBytes(32).toString('hex'),
-    daemon_host: 'public.turtlenode.io',
-    daemon_port: 11898,
+    daemon_host: 'monkeytips.top',
+    daemon_port: 13002,
     pubnodes_date: null,
     pubnodes_data: FALLBACK_NODES,
-    pubnodes_custom: ['127.0.0.1:11898'],
+    pubnodes_custom: ['127.0.0.1:13002'],
     tray_minimize: false,
     tray_close: false,
     darkmode: true
@@ -82,7 +82,7 @@ function createWindow () {
     win = splash.initSplashScreen({
         windowOpts: winOpts,
         templateUrl: path.join(__dirname, "src/html/splash.html"),
-        delay: 0, 
+        delay: 0,
         minVisible: 3000,
         splashScreenOpts: {
             width: 425,
@@ -120,7 +120,7 @@ function createWindow () {
                 win.minimize();
             }
         }
-        
+
     });
 
     win.on('show', () => {
@@ -203,7 +203,7 @@ function createWindow () {
             });
         }
     });
-    
+
     win.on('closed', () => {
         win = null;
     });
@@ -211,7 +211,7 @@ function createWindow () {
     win.setMenu(null);
 
     // misc handler
-    win.webContents.on('crashed', () => { 
+    win.webContents.on('crashed', () => {
         // todo: prompt to restart
         log.debug('webcontent was crashed');
     });
@@ -274,7 +274,7 @@ function serviceBinCheck(){
             log.error(err);
         }else{
             settings.set('service_bin', targetPath);
-            log.debug(`turtle-service copied to ${targetPath}`);
+            log.debug(`monkey-service copied to ${targetPath}`);
         }
         //log.warn(`TurtleService copied to ${targetPath}`);
         //settings.set('service_bin', targetPath);
@@ -320,7 +320,7 @@ app.on('ready', () => {
         log.info('Public node list up to date, skipping update');
         storeNodeList(false); // from local cache
     }
-    
+
     createWindow();
 
     // target center pos of primary display
@@ -330,7 +330,7 @@ app.on('ready', () => {
     let ty = Math.ceil((primaryDisp.workAreaSize.height - (DEFAULT_SIZE.height))/2);
     if(tx > 0 && ty > 0) win.setPosition(tx, ty);
 
-    
+
 });
 
 // Quit when all windows are closed.

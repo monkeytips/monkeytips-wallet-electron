@@ -8,7 +8,7 @@ const qr = require('qr-image');
 exports.triggerEvent = (el, type) => {
     var e = document.createEvent('HTMLEvents');
     e.initEvent(type, false, true);
-    el.dispatchEvent(e);     
+    el.dispatchEvent(e);
  };
 
 function addEvent(el, type, handler) {
@@ -102,9 +102,9 @@ exports.genQrDataUrl = (inputStr) => {
     return nImg.toDataURL();
 };
 
-exports.validateTRTLAddress = (address) => {
+exports.validatedicKAddress = (address) => {
     if(!address) return false;
-    let re = new RegExp(/^TRTL(?=[aA-zZ0-9]*$)(?:.{95}|.{183})$/g);
+    let re = new RegExp(/^dicK(?=[aA-zZ0-9]*$)(?:.{98}|.{186})$/g); 
     return re.test(address);
 };
 

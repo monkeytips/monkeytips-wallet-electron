@@ -218,11 +218,11 @@ function showToast(msg, duration, force){
     if(datoaste && force) {
         datoaste.parentNode.removeChild(datoaste);
     }
-    
+
     //if(datoaste) return;
 
     let toastOpts = {
-        style: { main: { 
+        style: { main: {
             'padding': '4px 6px','left': '3px','right':'auto','border-radius': '0px'
         }},
         settings: {duration: duration}
@@ -265,7 +265,7 @@ let keybindingTpl = `<div class="transaction-panel">
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>Home</kbd></th>
     <td>Switch to <strong>overview/welcome</strong> screen</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>Tab</kbd></th>
     <td>Switch to <strong>next screen</strong></td>
@@ -284,19 +284,19 @@ let keybindingTpl = `<div class="transaction-panel">
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>i</kbd></th>
     <td>Switch to <strong>Import wallet from mnemonic seed</strong> screen</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>e</kbd></th>
     <td>Switch to <strong>Export private keys/seed</strong> screen (when wallet opened)</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>t</kbd></th>
     <td>Switch to <strong>Transactions</strong> screen (when wallet opened)</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>s</kbd></th>
     <td>Switch to <strong>Send/Transfer</strong> screen (when wallet opened)</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>\\</kbd></th>
     <td>Toggle dark/night mode</td>
@@ -308,7 +308,7 @@ let keybindingTpl = `<div class="transaction-panel">
 <tr>
     <th scope="col"><kbd>Esc</kbd></th>
     <td>Close any opened dialog (like this dialog)</td>
-</tr> 
+</tr>
 </tbody>
 </table>
 <div class="div-panel-buttons">
@@ -319,10 +319,10 @@ let keybindingTpl = `<div class="transaction-panel">
 
 function genPaymentId(ret){
     ret = ret || false;
-    
+
     let payId = require('crypto').randomBytes(32).toString('hex');
     if(ret) return payId;
-    
+
     let dialogTpl = `<div class="transaction-panel">
     <h4>Generated Payment ID:</h4>
     <textarea data-cplabel="Payment ID" title="click to copy" class="ctcl default-textarea" rows="1" readonly="readonly">${payId}</textarea>
@@ -345,7 +345,7 @@ function showIntegratedAddressForm(){
     <h4>Generate Integrated Address:</h4>
     <div class="input-wrap">
     <label>Wallet Address</label>
-    <textarea id="genInputAddress" class="default-textarea" placeholder="Required, put any valid TRTL address..">${ownAddress}</textarea>
+    <textarea id="genInputAddress" class="default-textarea" placeholder="Required, put any valid dicK address..">${ownAddress}</textarea>
     </div>
     <div class="input-wrap">
     <label>Payment Id (<a id="makePaymentId" class="wallet-tool inline-tool" title="generate random payment id...">generate</a>)</label>
@@ -422,7 +422,7 @@ function changeSection(sectionId, isSettingRedir) {
 
     let finalTarget = targetSection;
     let toastMsg = '';
-    
+
     if(needServiceReady.indexOf(targetSection) >=0 && !isServiceReady){
         // no access to wallet, send, tx when no wallet opened
         finalTarget = 'section-welcome';
@@ -437,7 +437,7 @@ function changeSection(sectionId, isSettingRedir) {
         if(targetSection === 'section-overview-load'){
             initNodeCompletion();
         }
-        // if(targetSection === 'section-settings'){           
+        // if(targetSection === 'section-settings'){
         //     let defaultText = 'Type first few character(s) and select from public node list, or type to your own node address';
         //     if(isServiceReady){
         //         settingsInputDaemonAddress.setAttribute('disabled','disabled');
@@ -468,7 +468,7 @@ function changeSection(sectionId, isSettingRedir) {
     let newActiveNavbarButton = document.querySelector(`.navbar button[data-section="${finalButtonTarget}"]`);
     if(newActiveNavbarButton){
         const activeButton = document.querySelector(`.btn-active`);
-        if(activeButton) activeButton.classList.remove('btn-active');    
+        if(activeButton) activeButton.classList.remove('btn-active');
         if(newActiveNavbarButton) newActiveNavbarButton.classList.add('btn-active');
     }
 
@@ -587,7 +587,7 @@ function initAddressCompletion(){
             var wpayid = spl[2];
             return `<div class="autocomplete-suggestion" data-paymentid="${wpayid}" data-val="${waddr}">${wname.replace(re, "<b>$1</b>")}<br><span class="autocomplete-wallet-addr">${waddr.replace(re, "<b>$1</b>")}<br>Payment ID: ${(wpayid ? wpayid.replace(re, "<b>$1</b>") : 'N/A')}</span></div>`;
         },
-        onSelect: function(e, term, item){               
+        onSelect: function(e, term, item){
             document.getElementById('input-send-payid').value = item.getAttribute('data-paymentid');
         }
     });
@@ -607,10 +607,10 @@ function formMessageSet(target, status, txt){
     formMessageReset();
     let the_target = `${target}-${status}`;
     let the_el = null;
-    try{ 
+    try{
         the_el = document.querySelector('.form-ew[id$="'+the_target+'"]');
     }catch(e){}
-    
+
     if(the_el){
         the_el.classList.remove('hidden');
         wsutil.innerHTML(the_el, txt);
@@ -622,18 +622,7 @@ function insertSampleAddresses(){
     let flag = 'addressBookFirstUse';
     if(!settings.get(flag, true)) return;
     const sampleData = [
-        { name: 'labaylabay',
-          address: 'TRTLv1A26ngXApin33p1JsSE9Yf6REj97Xruz15D4JtSg1wuqYTmsPj5Geu2kHtBzD8TCsfd5dbdYRsrhNXMGyvtJ61AoYqLXVS',
-          paymentId: 'DF794857BC4587ECEC911AF6A6AB02513FEA524EC5B98DA8702FAC92195A94B2', 
-        },
-        { name: 'Macroshock',
-          address: 'TRTLv3R17LWbVw8Qv4si2tieyKsytUfKQXUgsmjksgrgJsTsnhzxNAeLKPjsyDGF7HGfjqkDegu2LPaC5NeVYot1SnpfcYmjwie',
-          paymentId: '', 
-        },
-        { name: 'RockSteady',
-          address: 'TRTLuxEnfjdF46cBoHhyDtPN32weD9fvL43KX5cx2Ck9iSP4BLNPrJY3xtuFpXtLxiA6LDYojhF7n4SwPNyj9M64iTwJ738vnJk',
-          paymentId: '', 
-        }
+        
     ];
 
     sampleData.forEach((item) => {
@@ -689,7 +678,7 @@ function handleSettings(){
         let serviceBinValue = settingsInputServiceBin.value ? settingsInputServiceBin.value.trim() : '';
         //let daemonHostValue = settingsInputDaemonAddress.value ? settingsInputDaemonAddress.value.trim() :'';
         //let daemonPortValue = settingsInputDaemonPort.value ? parseInt(settingsInputDaemonPort.value.trim(),10) : '';
-        
+
         // if(!serviceBinValue.length || !daemonHostValue.length || !Number.isInteger(daemonPortValue)){
         //     formMessageSet('settings','error',`Settings can't be saved, please enter correct values`);
         //     return false;
@@ -701,10 +690,10 @@ function handleSettings(){
         }
 
         if(!wsutil.isRegularFileAndWritable(serviceBinValue)){
-            formMessageSet('settings','error',`Unable to find turtle-service, please enter the correct path`);
+            formMessageSet('settings','error',`Unable to find monkey-service, please enter the correct path`);
             return false;
         }
-        
+
         // let validHost = daemonHostValue === 'localhost' ? true : false;
         // if(require('net').isIP(daemonHostValue)) validHost = true;
         // if(!validHost){
@@ -720,8 +709,8 @@ function handleSettings(){
         //     formMessageSet('settings','error',`Invalid daemon/node port number!`);
         //     return false;
         // }
-        
-        
+
+
         let vals = {
             service_bin: serviceBinValue,
             daemon_host: settings.get('daemon_host'),
@@ -745,9 +734,9 @@ function handleAddressBook(){
         let currentLength = document.querySelectorAll('.addressbook-item:not([data-hash="fake-hash"])').length;
         let abookLength =abook.size;
         let perPage = 9;
-    
+
         if(currentLength >= abookLength  && !force)  return;
-    
+
         let listOpts = {
             valueNames: [
                 {data: ['hash', 'nameval','walletval','paymentidval','qrcodeval']},
@@ -755,12 +744,12 @@ function handleAddressBook(){
             ],
             indexAsync: true
         };
-    
+
         if(abookLength > perPage){
             listOpts.page = perPage;
             listOpts.pagination = true;
         }
-    
+
         const addressList = new List('addressbooks', listOpts);
         addressList.clear();
         Object.keys(abook.get()).forEach((key) => {
@@ -776,7 +765,7 @@ function handleAddressBook(){
                 qrcodeval: et.qrCode || ''
             });
         });
-    
+
         addressList.remove('hash', 'fake-hash');
     }
 
@@ -808,7 +797,7 @@ function handleAddressBook(){
                      <button data-addressid="${this.dataset.hash}" type="button" class="form-bt button-gray" id="button-addressbook-panel-close">Close</button>
              </div>
         `;
-     
+
         wsutil.innerHTML(dialog, tpl);
         // get new dialog
         dialog = document.getElementById('ab-dialog');
@@ -818,7 +807,7 @@ function handleAddressBook(){
              abdialog.close();
              wsutil.clearChild(abdialog);
          });
-     
+
          let deleteBtn = document.getElementById('button-addressbook-panel-delete');
          deleteBtn.addEventListener('click', () => {
              let tardel = this.dataset.nameval;
@@ -836,7 +825,7 @@ function handleAddressBook(){
                  }
              }
          });
-     
+
          let editBtn = document.getElementById('button-addressbook-panel-edit');
          editBtn.addEventListener('click', ()=>{
              let origHash = this.dataset.hash;
@@ -892,11 +881,11 @@ function handleAddressBook(){
             return;
         }
 
-        if(!wsutil.validateTRTLAddress(walletValue)){
+        if(!wsutil.validatedicKAddress(walletValue)){
             formMessageSet('addressbook','error',"Invalid TurtleCoin address");
             return;
         }
-        
+
         if( paymentIdValue.length){
             if( !wsutil.validatePaymentId(paymentIdValue) ){
                 formMessageSet('addressbook','error',"Invalid Payment ID");
@@ -916,7 +905,7 @@ function handleAddressBook(){
             formMessageSet('addressbook','error',"This combination of address and payment ID already exist, please enter new address or different payment id.");
             return;
         }
-   
+
         try{
             abook.set(entryHash, {
                 name: entryName,
@@ -926,7 +915,7 @@ function handleAddressBook(){
             });
             let oldHash = addressBookInputName.dataset.oldhash || '';
             let isNew = (oldHash.length && oldHash !== entryHash);
-            
+
             if(isUpdate && isNew){
                 abook.delete(oldHash);
             }
@@ -1176,7 +1165,7 @@ function handleWalletImportKeys(){
         let viewKeyValue = importKeyInputViewKey.value ? importKeyInputViewKey.value.trim() : '';
         let spendKeyValue = importKeyInputSpendKey.value ? importKeyInputSpendKey.value.trim() : '';
         let scanHeightValue = importKeyInputScanHeight.value ? parseInt(importKeyInputScanHeight.value,10) : 1;
-        
+
         // validate path
         wsutil.validateWalletPath(filePathValue, DEFAULT_WALLET_PATH).then((finalPath)=>{
             if(!passwordValue.length){
@@ -1195,7 +1184,7 @@ function handleWalletImportKeys(){
                 formMessageSet('import','error', 'View Key and Spend Key can not be left blank!');
                 return;
             }
-    
+
             if(!wsutil.validateSecretKey(viewKeyValue)){
                 formMessageSet('import','error', 'Invalid view key!');
                 return;
@@ -1352,7 +1341,7 @@ function handleSendTransfer(){
     sendMaxAmount.addEventListener('click', (event) => {
         let maxsend = event.target.dataset.maxsend;
         if(maxsend) sendInputAmount.value = maxsend;
-        
+
     });
     sendInputFee.value = 0.1;
     function setPaymentIdState(addr){
@@ -1391,8 +1380,8 @@ function handleSendTransfer(){
 
         let tobeSent = 0;
 
-        if(!recAddress.length || !wsutil.validateTRTLAddress(recAddress)){
-            formMessageSet('send','error','Sorry, invalid TRTL address');
+        if(!recAddress.length || !wsutil.validatedicKAddress(recAddress)){
+            formMessageSet('send','error','Sorry, invalid dicK address');
             return;
         }
 
@@ -1409,7 +1398,7 @@ function handleSendTransfer(){
         }
 
         if(recAddress.length > 99) recPayId = '';
-        
+
         if (amount <= 0) {
             formMessageSet('send','error','Sorry, invalid amount');
             return;
@@ -1437,7 +1426,7 @@ function handleSendTransfer(){
         let rFee = fee; // copy raw fee for dialog
         tobeSent += fee;
         fee *= 100;
-        
+
 
         let nodeFee = wsession.get('nodeFee') || 0;
         tobeSent = (tobeSent+nodeFee).toFixed(2);
@@ -1447,7 +1436,7 @@ function handleSendTransfer(){
         if(parseFloat(tobeSent) > parseFloat(availableBalance)){
             formMessageSet(
                 'send',
-                'error', 
+                'error',
                 `Sorry, you don't have enough funds to process this transfer. Transfer amount+fees: ${(tobeSent)}`
             );
             return;
@@ -1470,13 +1459,13 @@ function handleSendTransfer(){
                         <dt class="${recPayId.length ? 'dt-ib' : 'hidden'}">Payment ID:</dt>
                         <dd class="${recPayId.length ? 'dd-ib' : 'hidden'}">${recPayId.length ? recPayId : 'N/A'}</dd>
                         <dt class="dt-ib">Amount:</dt>
-                        <dd class="dd-ib">${rAmount} TRTL</dd>
+                        <dd class="dd-ib">${rAmount} dicK</dd>
                         <dt class="dt-ib">Transaction Fee:</dt>
-                        <dd class="dd-ib">${rFee} TRTL</dd>
+                        <dd class="dd-ib">${rFee} dicK</dd>
                         <dt class="dt-ib">Node Fee:</dt>
-                        <dd class="dd-ib">${(nodeFee > 0 ? nodeFee : '0.00')} TRTL</dd>
+                        <dd class="dd-ib">${(nodeFee > 0 ? nodeFee : '0.00')} dicK</dd>
                         <dt class="dt-ib">Total:</dt>
-                        <dd class="dd-ib">${tobeSent} TRTL</dd>
+                        <dd class="dd-ib">${tobeSent} dicK</dd>
                     </dl>
                 </div>
             </div>
@@ -1593,7 +1582,7 @@ function handleTransactions(){
                             <tr><th scope="col">Unlock Time</th>
                                 <td>${tx.dataset.unlocktime}</td></tr>
                         </tbody>
-                    </table> 
+                    </table>
                 </div>
                 <div class="div-panel-buttons">
                     <button data-target="#tx-dialog" type="button" class="form-bt button-red dialog-close-default" id="button-transactions-panel-close">Close</button>
@@ -1642,7 +1631,7 @@ function handleTransactions(){
                 txListOpts.pagination = [{
                     innerWindow: 2,
                     outerWindow: 1
-                }]; 
+                }];
             }
             TXLIST_OBJ = new List('transaction-lists', txListOpts, txs);
             TXLIST_OBJ.sort('timestamp', {order: 'desc'});
@@ -1836,7 +1825,7 @@ function initHandlers(){
     initSectionTemplates();
     let darkStart = settings.get('darkmode', false);
     setDarkMode(darkStart);
-    
+
     // netstatus
     handleNetworkChange();
 
@@ -1919,13 +1908,13 @@ function initHandlers(){
             formMessageSet('gia','error', 'Address & Payment ID is required');
             return;
         }
-        if(!wsutil.validateTRTLAddress(addr)){
-            formMessageSet('gia','error', 'Invalid TRTL address');
+        if(!wsutil.validatedicKAddress(addr)){
+            formMessageSet('gia','error', 'Invalid dicK address');
             return;
         }
         // only allow standard address
         if(addr.length > 99){
-            formMessageSet('gia','error', 'Only standard TRTL address are supported');
+            formMessageSet('gia','error', 'Only standard dicK address are supported');
             return;
         }
         if(!wsutil.validatePaymentId(pid)){
@@ -1955,7 +1944,7 @@ function initHandlers(){
         if(dialogType === 'saveFile') {
             dialogOpts.title = `Select directory to store your ${targetName}, and give it a filename.`;
             dialogOpts.buttonLabel = 'OK';
-            
+
             remote.dialog.showSaveDialog(dialogOpts, (file) => {
                 if (file) targetInput.value = file;
             });
@@ -2042,7 +2031,7 @@ function initHandlers(){
     });
 
     kswitch.addEventListener('click', showKeyBindings);
-    
+
     //handleNetworkChange();
 
     // settings handlers

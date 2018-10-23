@@ -17,7 +17,7 @@ const SERVICE_LOG_LEVEL_DEFAULT = 0;
 const SERVICE_LOG_LEVEL_DEBUG = 4;
 const SERVICE_LOG_LEVEL = (SERVICE_LOG_DEBUG ? SERVICE_LOG_LEVEL_DEBUG : SERVICE_LOG_LEVEL_DEFAULT);
 
-const ERROR_WALLET_EXEC = 'Failed to start turtle-service. Set the path to turtle-service properly in the settings tab.';
+const ERROR_WALLET_EXEC = 'Failed to start monkey-service. Set the path to monkey-service properly in the settings tab.';
 const ERROR_WALLET_PASSWORD = 'Failed to load your wallet, please check your password';
 const ERROR_WALLET_IMPORT = 'Import failed, please check that you have entered all information correctly';
 const ERROR_WALLET_CREATE = 'Wallet can not be created, please check your input and try again';
@@ -46,13 +46,13 @@ var WalletShellManager = function(){
     this.serviceApi =  null;
     this.syncWorker = null;
     this.fusionTxHash = [];
-    
+
 };
 
 WalletShellManager.prototype.init = function(){
     this._getSettings();
     if(this.serviceApi !== null) return;
-    
+
     let cfg = {
         service_host: this.serviceHost,
         service_port: this.servicePort,
@@ -78,7 +78,7 @@ WalletShellManager.prototype._reinitSession = function(){
     });
 };
 
-// check 
+// check
 WalletShellManager.prototype.serviceStatus = function(){
     return  (undefined !== this.serviceProcess && null !== this.serviceProcess);
 };
@@ -135,7 +135,7 @@ WalletShellManager.prototype.startService = function(walletFile, password, onErr
     }
 
     if(this.syncWorker) this.stopSyncWorker();
-    
+
     let serviceArgs = this.serviceArgsDefault.concat([
         '-w', walletFile,
         '-p', password,
@@ -153,9 +153,9 @@ WalletShellManager.prototype.startService = function(walletFile, password, onErr
                 onError(`ERROR_WALLET_EXEC: ${error.message}`);
             }else{
                 log.debug(stdout);
-                if(stdout && stdout.length && stdout.indexOf('TRTL') !== -1){
+                if(stdout && stdout.length && stdout.indexOf('dicK') !== -1){
                     let trimmed = stdout.trim();
-                    let walletAddress = trimmed.substring(trimmed.indexOf('TRTL'), trimmed.length);
+                    let walletAddress = trimmed.substring(trimmed.indexOf('dicK'), trimmed.length);
                     wsession.set('loadedWalletAddress', walletAddress);
                     wsm._spawnService(walletFile, password, onError, onSuccess, onDelay);
                 }else{
@@ -218,24 +218,24 @@ WalletShellManager.prototype._spawnService = function(walletFile, password, onEr
         this.servicePid = this.serviceProcess.pid;
     }catch(e){
         if(onError) onError(ERROR_WALLET_EXEC);
-        log.error('turtle-service is not running');
+        log.error('monkey-service is not running');
         return false;
     }
-    
+
     this.serviceProcess.on('close', (code, signal) => {
         this.terminateService(true);
-        log.debug(`turtle-service closed, signal: ${signal}, code: ${code}`);
+        log.debug(`monkey-service closed, signal: ${signal}, code: ${code}`);
     });
 
     this.serviceProcess.on('error', (err) => {
         this.terminateService(true);
         wsm.syncWorker.stopSyncWorker();
-        log.error(`turtle-service error: ${err.message}`);
+        log.error(`monkey-service error: ${err.message}`);
     });
 
     if(!this.serviceStatus()){
         if(onError) onError(ERROR_WALLET_EXEC);
-        log.error('turtle-service is not running');
+        log.error('monkey-service is not running');
         return false;
     }
 
@@ -263,7 +263,7 @@ WalletShellManager.prototype._spawnService = function(walletFile, password, onEr
             return true;
         }).catch((err) => {
             log.debug('Connection failed or timedout');
-            if(retry === 10 && onDelay) onDelay(`Still no respond from turtle-service, please wait a few more seconds...`);
+            if(retry === 10 && onDelay) onDelay(`Still no respond from monkey-service, please wait a few more seconds...`);
             if(retry >= MAX_CHECK && !TEST_OK){
                 if(wsm.serviceStatus()){
                     wsm.terminateService();
@@ -332,14 +332,14 @@ WalletShellManager.prototype.terminateService = function(force) {
         if(this.servicePid) process.kill(this.servicePid, signal);
     }catch(e){
         if(!force && this.serviceProcess) {
-            log.debug(`SIGKILLing turtle-service`);
+            log.debug(`SIGKILLing monkey-service`);
             try{this.serviceProcess.kill('SIGKILL');}catch(err){}
             if(this.servicePid){
                 try{process.kill(this.servicePid, 'SIGKILL');}catch(err){}
             }
         }
     }
-    
+
     this.serviceProcess = null;
     this.servicePid = null;
 };
@@ -355,7 +355,7 @@ WalletShellManager.prototype.startSyncWorker = function(){
     this.syncWorker = childProcess.fork(
         path.join(__dirname,'./ws_syncworker.js')
     );
-    
+
     this.syncWorker.on('message', (msg) => {
         if(msg.type === 'serviceStatus' ){
             wsm.syncWorker.send({
@@ -412,7 +412,7 @@ WalletShellManager.prototype.stopSyncWorker = function(){
 
 WalletShellManager.prototype.getNodeFee = function(){
     let wsm = this;
-    
+
     this.serviceApi.getFeeInfo().then((res) => {
         let theFee;
         if(!res.amount || !res.address){
@@ -422,7 +422,7 @@ WalletShellManager.prototype.getNodeFee = function(){
         }
         wsession.set('nodeFee', theFee);
         if(theFee <= 0) return theFee;
-        
+
         wsm.notifyUpdate({
             type: 'nodeFeeUpdated',
             data: theFee
@@ -567,12 +567,12 @@ WalletShellManager.prototype._fusionGetMinThreshold = function(threshold, minThr
         threshold = parseInt(threshold,10);
         minThreshold = minThreshold || threshold;
         maxFusionReadyCount = maxFusionReadyCount || 0;
-        
+
         let maxThreshCheckIter = 20;
 
         wsm.serviceApi.estimateFusion({threshold: threshold}).then((res)=>{
             // nothing to optimize
-            if( counter === 0 && res.fusionReadyCount === 0) return resolve(0); 
+            if( counter === 0 && res.fusionReadyCount === 0) return resolve(0);
             // stop at maxThreshCheckIter or when threshold too low
             if( counter > maxThreshCheckIter || threshold < 10) return resolve(minThreshold);
             // we got a possibly best minThreshold
@@ -599,8 +599,8 @@ WalletShellManager.prototype._fusionSendTx = function(threshold, counter){
         counter = counter || 0;
         let maxIter = 256;
         if(counter >= maxIter) return resolve(wsm.fusionTxHash); // stop at max iter
-        
-        // keep sending fusion tx till it hit IOOR or reaching max iter 
+
+        // keep sending fusion tx till it hit IOOR or reaching max iter
         log.debug(`send fusion tx, iteration: ${counter}`);
         wsm.serviceApi.sendFusionTransaction({threshold: threshold}).then((resp)=> {
             wsm.fusionTxHash.push(resp.transactionHash);
@@ -659,7 +659,7 @@ WalletShellManager.prototype.optimizeWallet = function(){
 };
 
 WalletShellManager.prototype.networkStateUpdate = function(state){
-    if(!this.syncWorker) return;    
+    if(!this.syncWorker) return;
     log.debug('ServiceProcess PID: ' + this.servicePid);
     if(state === 0){
         // pause the syncworker, but leave service running
@@ -669,7 +669,7 @@ WalletShellManager.prototype.networkStateUpdate = function(state){
         });
     }else{
         this.init();
-        // looks like turtle-service always stalled after disconnected, just kill & relaunch it
+        // looks like monkey-service always stalled after disconnected, just kill & relaunch it
         let pid = this.serviceProcess.pid || null;
         this.terminateService();
         // wait a bit
@@ -678,7 +678,7 @@ WalletShellManager.prototype.networkStateUpdate = function(state){
                 try{process.kill(pid, 'SIGKILL');}catch(e){}
             }
             setTimeout(()=>{
-                log.debug('respawning turtle-service');
+                log.debug('respawning monkey-service');
                 this.serviceProcess = childProcess.spawn(this.serviceBin, this.serviceActiveArgs);
                 // store new pid
                 this.servicePid = this.serviceProcess.pid;
@@ -687,7 +687,7 @@ WalletShellManager.prototype.networkStateUpdate = function(state){
                     data: null
                 });
             },15000);
-        },2500);        
+        },2500);
     }
 };
 
