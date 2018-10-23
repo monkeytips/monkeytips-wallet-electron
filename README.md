@@ -1,4 +1,4 @@
-![WalletShell](docs/monkeytips.png)  
+![WalletShell](docs/mtiplogo.png)  
 WalletShell is a GUI wallet for monkeytips.
 
 ![WalletShell Screens](https://i.imgur.com/41Ujq0S.gif "WalletShell Screens")
