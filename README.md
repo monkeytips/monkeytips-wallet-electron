@@ -4,7 +4,7 @@ WalletShell is a GUI wallet for monkeytips.
 ![WalletShell Screens](https://i.imgur.com/41Ujq0S.gif "WalletShell Screens")
 
 ### Features:
-This wallet contains the basic functions required to manage your monkeytipsassets:
+This wallet contains the basic functions required to manage your monkeytips assets:
 
 * Wallet creation
   * Create new wallet
