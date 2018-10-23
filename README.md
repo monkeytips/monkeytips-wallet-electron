@@ -1,4 +1,4 @@
-![WalletShell](docs/walletshell.png)  
+![WalletShell](docs/monkeytips.png)  
 WalletShell is a GUI wallet for monkeytips.
 
 ![WalletShell Screens](https://i.imgur.com/41Ujq0S.gif "WalletShell Screens")
@@ -19,7 +19,7 @@ This wallet contains the basic functions required to manage your monkeytipsasset
   * Display transaction detail
   * Export incoming, outgoing, or all transactions to csv file.
   * Incoming Transaction notification
-  * Send monkeytipsto single recipient address, allow to set payment id and custom fee. Provides address lookup from addressbook.
+  * Send monkeytips to single recipient address, allow to set payment id and custom fee. Provides address lookup from address book.
   * Perform wallet optimization by creating fusion transactions
   * Provides utility to generate payment id and integrated address
 * Address book
@@ -40,7 +40,7 @@ This wallet contains the basic functions required to manage your monkeytipsasset
 
 WalletShell relies on `monkey-service` to manage wallet container &amp; rpc communication.
 
-Release installer & packaged archived includes a ready to use `monkey-service` binary, which is unmodified copy monkeytipsrelease archive.
+Release installer & packaged archived includes a ready to use `monkey-service` binary, which is unmodified copy monkeytips release archive.
 
 On first launch, WalletShell will try to detect location/path of bundled `monkey-service` binary, but if it's failed, you can manually set path to the `monkey-service` binary on the Settings screen.
 
@@ -101,7 +101,7 @@ $ npm run dist-lin
 # build Windows package
 $ mkdir -p ./bin/win
 $ cp /path/to/win-version-of/monkey-service.exe ./bin/win/
-$ npm run dist-lin
+$ npm run dist-win
 
 # build OSX package
 $ mkdir -p ./bin/osx
