@@ -152,7 +152,7 @@ function updateSyncProgres(data){
         let connStatusText = `Connected to: <strong>${wsession.get('connectedNode')}</strong>`;
         let connNodeFee = wsession.get('nodeFee');
         if(connNodeFee > 0 ){
-            connStatusText += ` | Node fee: <strong>${connNodeFee.toFixed(2)} TRTL</strong>`;
+            connStatusText += ` | Node fee: <strong>${connNodeFee.toFixed(2)} dicK</strong>`;
         }
         connInfoDiv.innerHTML = connStatusText;
         connInfoDiv.classList.remove('conn-warning');
@@ -194,7 +194,7 @@ function updateBalance(data){
     wsession.set('walletUnlockedBalance', bUnlocked);
     wsession.set('walletLockedBalance', bLocked);
     let walletFile = require('path').basename(settings.get('recentWallet'));
-    let wintitle = `(${walletFile}) - ${bUnlocked} TRTL`;
+    let wintitle = `(${walletFile}) - ${bUnlocked} dicK`;
     setWinTitle(wintitle);
     
     if(availableBalance > 0){
@@ -272,7 +272,7 @@ function updateTransactions(result){
     if(notify){
         settings.set('last_notification', newLastHash);
         let notiOptions = {
-            'body': `Amount: ${(newTxAmount)} TRTL\nHash: ${newLastHash.substring(24,-0)}...`,
+            'body': `Amount: ${(newTxAmount)} dicK\nHash: ${newLastHash.substring(24,-0)}...`,
             'icon': '../assets/walletshell_icon.png'
         };
         let itNotification = new Notification('Incoming Transfer', notiOptions);
@@ -300,7 +300,7 @@ function showFeeWarning(fee){
     let htmlStr = `
         <h5>Fee Info</h5>
         <p>You are connected to a public node (${settings.get('daemon_host')}:${settings.get('daemon_port')}) that charges a fee to send transactions.<p>
-        <p>The fee for sending transactions is: <strong>${fee.toFixed(2)} TRTL </strong>.<br>
+        <p>The fee for sending transactions is: <strong>${fee.toFixed(2)} dicK </strong>.<br>
             If you don't want to pay the node fee, please close your wallet, and update your settings to use different public node or your own node.
         </p>
         <p style="text-align:center;margin-top: 1.25rem;"><button  type="button" class="form-bt button-green" id="dialog-end">OK, I Understand</button></p>

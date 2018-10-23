@@ -3,7 +3,7 @@ const remote = require('electron').remote;
 const Store = require('electron-store');
 const settings = new Store({name: 'Settings'});
 
-const DEFAULT_TITLE = 'WalletShell TurtleCoin Wallet';
+const DEFAULT_TITLE = 'WalletShell monkeytipsWallet';
 const SESSION_KEY = 'wlshell';
 
 // TODO: this is the only thing left as global
@@ -32,7 +32,7 @@ var WalletShellSession = function(){
         txNew: [],
         nodeFee: 0,
         nodeChoices: settings.get('pubnodes_data', []),
-        servicePath: settings.get('service_bin', 'turtle-service'),
+        servicePath: settings.get('service_bin', 'monkey-service'),
         configUpdated: false,
         uiStateChanged: false,
         defaultTitle: DEFAULT_TITLE,
