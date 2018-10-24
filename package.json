@@ -1,10 +1,10 @@
 {
-  "name": "walletshell",
-  "productName": "WalletShell",
+  "name": "monkeyshell",
+  "productName": "MonkeyShell",
   "description": "monkeytipsGUI Wallet",
   "version": "v0.3.4",
-  "homepage": "https://github.com/turtlecoin/turtle-wallet-electron",
-  "repository": "https://github.com/turtlecoin/turtle-wallet-electron",
+  "homepage": "https://github.com/monkeytips/monkeytips-wallet-electron",
+  "repository": "https://github.com/monkeytips/monkeytips-wallet-electron",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -15,7 +15,7 @@
     "dist-mac": "./node_modules/.bin/electron-builder --x64 --mac -c.extraResources=./bin/osx/monkey-service"
   },
   "keywords": [],
-  "author": "Rixombea, Macroshock, TurtleKoin Developers",
+  "author": "Rixombea, Macroshock, crappyrules TurtleCoin Developers",
   "license": "ISC",
   "devDependencies": {
     "devtron": "^1.4.0",
@@ -33,9 +33,9 @@
     "request-promise-native": "^1.0.5"
   },
   "build": {
-    "appId": "lol.turtlecoin.walletshell",
-    "productName": "WalletShell",
-    "copyright": "Copyright (c) 2018 Rixombea, Macroshock, TurtleKoin Developers",
+    "appId": "monkeytips.monkeyshell",
+    "productName": "MonkeyShell",
+    "copyright": "Copyright (c) 2018 Rixombea, Macroshock, TurtleCoin Developers",
     "directories": {
       "app": ".",
       "output": "dist",
@@ -47,14 +47,14 @@
         "AppImage",
         "tar.bz2"
       ],
-      "maintainer": "rixombea (@labaylabay)",
+      "maintainer": "crappyrules (@crappyrules)",
       "category": "Office",
-      "vendor": "TurtleCoin",
+      "vendor": "monkeytips",
       "synopsis": "monkeytipsGUI Wallet"
     },
     "win": {
       "target": "nsis",
-      "publisherName": "TurtleCoin"
+      "publisherName": "monkeytips"
     },
     "nsis": {
       "artifactName": "${productName}-v${version}-${os}-${arch}-setup.${ext}",
