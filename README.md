@@ -1,5 +1,5 @@
-![WalletShell](docs/mtiplogo.png)  
-WalletShell is a GUI wallet for monkeytips.
+![monkeyshell](docs/mtiplogo.png)  
+monkeyshell is a GUI wallet for monkeytips.
 
 ![WalletShell Screens](https://i.imgur.com/41Ujq0S.gif "WalletShell Screens")
 
@@ -38,24 +38,24 @@ This wallet contains the basic functions required to manage your monkeytips asse
 
 ### Notes
 
-WalletShell relies on `monkey-service` to manage wallet container &amp; rpc communication.
+monkeyshell relies on `monkey-service` to manage wallet container &amp; rpc communication.
 
 Release installer & packaged archived includes a ready to use `monkey-service` binary, which is unmodified copy monkeytips release archive.
 
-On first launch, WalletShell will try to detect location/path of bundled `monkey-service` binary, but if it's failed, you can manually set path to the `monkey-service` binary on the Settings screen.
+On first launch, monkeyshell will try to detect location/path of bundled `monkey-service` binary, but if it's failed, you can manually set path to the `monkey-service` binary on the Settings screen.
 
 If you don't trust the bundled `monkey-service` file, you can compare the checksum (sha256sum) against one from the official release, or simply download and use the binary from official monkeytipsrelease, which is available here: https://github.com/monkeytips/monkeytips/releases. Then,  make sure to update your `monkey-service` path setting.
 
-### Download &amp; Run WalletShell
+### Download &amp; Run monkeyshell
 
 #### Windows:
 1. Download the latest installer here: https://github.com/monkeytips//monkeytips-wallet-electron/releases
-2. Run the installer (`walletshell-<version>-win-setup.exe`) and follow the installation wizard.
-3. Launch WalletShell via start menu or desktop shortcut.
+2. Run the installer (`monkeyshell-<version>-win-setup.exe`) and follow the installation wizard.
+3. Launch monkeyshell via start menu or desktop shortcut.
 
 #### GNU/Linux (AppImage):
 1. Download latest AppImage bundle here: https://github.com/monkeytips//monkeytips-wallet-electron/releases
-2. Make it executable, either via GUI file manager or command line, e.g. `chmod +x walletshell-<version>-linux.AppImage`
+2. Make it executable, either via GUI file manager or command line, e.g. `chmod +x monkeyshell-<version>-linux.AppImage`
 3. Run/execute the file, double click in file manager, or run via shell/command line.
 
 See: https://docs.appimage.org/user-guide/run-appimages.html
@@ -63,12 +63,12 @@ See: https://docs.appimage.org/user-guide/run-appimages.html
 #### GNU/Linux (tar.bz2 archive)
 1. Download latest archive here: https://github.com/monkeytips//monkeytips-wallet-electron/releases
 2. Extract with file/archive manager of your choice.
-3. Run the executable binary (`walletshell-<version>/walletshell`)
+3. Run the executable binary (`monkeyshell-<version>/monkeyshell`)
 
 #### macOS (TBD/Untested)
 1. Download latest archive here: https://github.com/monkeytips//monkeytips-wallet-electron/releases
 2. Extract downloaded tar archived
-3. Run the executable binary (`WalletShell.app/Contents/MacOs/WalletShell`) ??
+3. Run the executable binary (`monkeyshell.app/Contents/MacOs/monkeyshell`) ??
 
 ### Build
 You need to have `Node.js` and `npm` installed, go to https://nodejs.org and find out how to get it installed on your platform.
